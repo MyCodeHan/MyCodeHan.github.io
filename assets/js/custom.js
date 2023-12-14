@@ -26,50 +26,48 @@
 
 
 
-//Submenu Dropdown Toggle
 if (document.querySelector('.mobile-menu')) {
-    var mobileMenu = document.querySelector('.mobile-menu');
-    var menuBox = mobileMenu.querySelector('.menu-box');
-    var menuContent = document.querySelector('.main-header .nav-outer .main-menu').innerHTML;
-    var stickyMenu = document.querySelector('.sticky-header .main-menu');
+    // Custom scrollbar
+    let menuBox = document.querySelector('.mobile-menu .menu-box');
+    menuBox.style.overflowY = 'scroll';
 
-    menuBox.innerHTML = menuContent;
-    stickyMenu.innerHTML = menuContent;
+    // Copy menu content
+    let mobileMenuContent = document.querySelector('.main-header .nav-outer .main-menu').innerHTML;
+    document.querySelector('.mobile-menu .menu-box .menu-outer').insertAdjacentHTML('beforeend', mobileMenuContent);
+    document.querySelector('.sticky-header .main-menu').insertAdjacentHTML('beforeend', mobileMenuContent);
 
-    var dropdownBtns = mobileMenu.querySelectorAll('.mobile-menu li.dropdown .dropdown-btn');
-    dropdownBtns.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            var dropdown = this.nextElementSibling;
+    // Dropdown Button
+    let dropdownBtns = document.querySelectorAll('.mobile-menu li.dropdown .dropdown-btn');
+    dropdownBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
             this.classList.toggle('open');
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            let ul = this.previousElementSibling;
+            if (ul) {
+                ul.style.transition = 'max-height 0.5s';
+                ul.style.maxHeight = ul.style.maxHeight === '0px' ? ul.scrollHeight + 'px' : '0px';
+            }
+            let megamenu = this.previousElementSibling;
+            if (megamenu) {
+                megamenu.style.transition = 'max-height 0.9s';
+                megamenu.style.maxHeight = megamenu.style.maxHeight === '0px' ? megamenu.scrollHeight + 'px' : '0px';
+            }
         });
     });
 
-    var megamenuBtns = mobileMenu.querySelectorAll('.mobile-menu li.dropdown .dropdown-btn');
-    megamenuBtns.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            var megamenu = this.previousElementSibling;
-            megamenu.style.display = megamenu.style.display === 'block' ? 'none' : 'block';
-        });
-    });
-
-    var menuToggleBtn = document.querySelector('.mobile-nav-toggler');
-    var menuBackdrop = mobileMenu.querySelector('.menu-backdrop');
-    var closeBtn = mobileMenu.querySelector('.close-btn');
-
-    menuToggleBtn.addEventListener('click', function() {
+    // Menu Toggle Btn
+    let mobileNavToggler = document.querySelector('.mobile-nav-toggler');
+    mobileNavToggler.addEventListener('click', function () {
         document.body.classList.add('mobile-menu-visible');
     });
 
-    function closeMobileMenu() {
-        document.body.classList.remove('mobile-menu-visible');
-    }
-
-    menuBackdrop.addEventListener('click', closeMobileMenu);
-    closeBtn.addEventListener('click', closeMobileMenu);
+    // Close Menu
+    let closeBtns = document.querySelectorAll('.mobile-menu .menu-backdrop, .mobile-menu .close-btn');
+    closeBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            document.body.classList.remove('mobile-menu-visible');
+        });
+    });
 }
-
-
 
 
 // Scroll to a Specific Div
