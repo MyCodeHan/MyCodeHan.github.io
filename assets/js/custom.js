@@ -98,21 +98,21 @@ if (document.querySelector('.mobile-menu')) {
 
 // Additional code for Parallax and One Page Nav (if needed)...
 
-// Update Header Style and Scroll to Top
-function headerStyle() {
-    let windowpos = window.scrollY;
-    let siteHeader = document.querySelector('.main-header');
-    let scrollLink = document.querySelector('.scroll-top');
-    if (windowpos >= 350) {
-        siteHeader.classList.add('fixed-header');
-        scrollLink.style.display = 'block';
-    } else {
-        siteHeader.classList.remove('fixed-header');
-        scrollLink.style.display = 'none';
-    }
-}
+// // Update Header Style and Scroll to Top
+// function headerStyle() {
+//     let windowpos = window.scrollY;
+//     let siteHeader = document.querySelector('.main-header');
+//     let scrollLink = document.querySelector('.scroll-top');
+//     if (windowpos >= 350) {
+//         siteHeader.classList.add('fixed-header');
+//         scrollLink.style.display = 'block';
+//     } else {
+//         siteHeader.classList.remove('fixed-header');
+//         scrollLink.style.display = 'none';
+//     }
+// }
 
-headerStyle();
+// headerStyle();
 
 // Scroll to a Specific Div
 // if($('.scroll-to-target').length){
@@ -158,22 +158,22 @@ if($('.scroll-nav').length) {
 }
 
 
-//Update Header Style and Scroll to Top
-// function headerStyle() {
-//     if($('.main-header').length){
-//         var windowpos = $(window).scrollTop();
-//         var siteHeader = $('.main-header');
-//         var scrollLink = $('.scroll-top');
-//         if (windowpos >= 350) {
-//             siteHeader.addClass('fixed-header');
-//             scrollLink.fadeIn(300);
-//         } else {
-//             siteHeader.removeClass('fixed-header');
-//             scrollLink.fadeOut(300);
-//         }
-//     }
-// }
-// headerStyle();
+// Update Header Style and Scroll to Top
+function headerStyle() {
+    if($('.main-header').length){
+        var windowpos = $(window).scrollTop();
+        var siteHeader = $('.main-header');
+        var scrollLink = $('.scroll-top');
+        if (windowpos >= 350) {
+            siteHeader.addClass('fixed-header');
+            scrollLink.fadeIn(300);
+        } else {
+            siteHeader.removeClass('fixed-header');
+            scrollLink.fadeOut(300);
+        }
+    }
+}
+headerStyle();
 
 
 
