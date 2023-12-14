@@ -67,6 +67,20 @@ if (document.querySelector('.mobile-menu')) {
             document.body.classList.remove('mobile-menu-visible');
         });
     });
+
+    // Prevent anchor link default behavior
+    let menuItems = document.querySelectorAll('.mobile-menu .menu-box .menu-outer a');
+    menuItems.forEach(function (item) {
+        item.addEventListener('click', function (event) {
+            // Prevent the default behavior (scrolling to the anchor)
+            event.preventDefault();
+
+            // Your additional logic goes here, if any
+
+            // Close the mobile menu if needed
+            document.body.classList.remove('mobile-menu-visible');
+        });
+    });
 }
 
 
