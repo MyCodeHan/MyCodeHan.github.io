@@ -65,80 +65,67 @@ if (document.querySelector('.mobile-menu')) {
         });
     });
 }
-
 // Scroll to a Specific Div
-if (document.querySelectorAll('.scroll-to-target').length) {
-    let scrollToTargets = document.querySelectorAll(".scroll-to-target");
-    scrollToTargets.forEach(function (target) {
-        target.addEventListener('click', function (event) {
-            // Prevent the default behavior (e.g., navigating to the anchor)
-            event.preventDefault();
+if($('.scroll-to-target').length){
+    $(".scroll-to-target").on('click', function() {
+        var target = $(this).attr('data-target');
+       // animate
+       $('html, body').animate({
+           scrollTop: $(target).offset().top
+        }, 1000);
 
-            let targetId = target.getAttribute('data-target');
-            let targetElement = document.querySelector(targetId);
-
-            if (targetElement) {
-                // Check if targetElement has scrollIntoView method
-                if (typeof targetElement.scrollIntoView === 'function') {
-                    // Scroll to the target section
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        });
     });
 }
 
-// Parallax Scene for Icons
-['1', '2', '3', '4', '5'].forEach(function (sceneNumber) {
-    if (document.querySelector('.parallax-scene-' + sceneNumber)) {
-        let scene = document.querySelector('.parallax-scene-' + sceneNumber);
-        let parallaxInstance = new Parallax(scene);
-    }
-});
 
-// Add One Page nav
-if (document.querySelector('.scroll-nav')) {
-    document.querySelector('.scroll-nav').addEventListener('click', function (event) {
-        event.preventDefault();
-        let targetId = event.target.getAttribute('href');
-        let targetElement = document.querySelector(targetId);
-        if (targetElement) {
-            window.scrollTo({
-                top: targetElement.offsetTop,
-                behavior: 'smooth'
-            });
-        }
-    });
+
+//Parallax Scene for Icons
+if($('.parallax-scene-1').length){
+    var scene = $('.parallax-scene-1').get(0);
+    var parallaxInstance = new Parallax(scene);
+}
+if($('.parallax-scene-2').length){
+    var scene = $('.parallax-scene-2').get(0);
+    var parallaxInstance = new Parallax(scene);
+}
+if($('.parallax-scene-3').length){
+    var scene = $('.parallax-scene-3').get(0);
+    var parallaxInstance = new Parallax(scene);
+}
+if($('.parallax-scene-4').length){
+    var scene = $('.parallax-scene-4').get(0);
+    var parallaxInstance = new Parallax(scene);
+}
+if($('.parallax-scene-5').length){
+    var scene = $('.parallax-scene-5').get(0);
+    var parallaxInstance = new Parallax(scene);
 }
 
-// Update Header Style and Scroll to Top
+
+
+//Add One Page nav
+if($('.scroll-nav').length) {
+    $('.scroll-nav').onePageNav();
+}
+
+
+//Update Header Style and Scroll to Top
 function headerStyle() {
-    let windowpos = window.scrollY;
-    let siteHeader = document.querySelector('.main-header');
-    let scrollLink = document.querySelector('.scroll-top');
-    if (windowpos >= 350) {
-        siteHeader.classList.add('fixed-header');
-        scrollLink.style.display = 'block';
-    } else {
-        siteHeader.classList.remove('fixed-header');
-        scrollLink.style.display = 'none';
+    if($('.main-header').length){
+        var windowpos = $(window).scrollTop();
+        var siteHeader = $('.main-header');
+        var scrollLink = $('.scroll-top');
+        if (windowpos >= 350) {
+            siteHeader.addClass('fixed-header');
+            scrollLink.fadeIn(300);
+        } else {
+            siteHeader.removeClass('fixed-header');
+            scrollLink.fadeOut(300);
+        }
     }
 }
-
 headerStyle();
-//===Search box ===
-function searchbox() {
-	//Search Box Toggle
-	if($('.seach-toggle').length){
-		//Dropdown Button
-		$('.seach-toggle').on('click', function() {
-			$(this).toggleClass('active');
-			$(this).next('.search-box').toggleClass('now-visible');
-		});
-	}
-}
+
 
 
 //Hide Loading Box (Preloader)
@@ -765,6 +752,17 @@ if ($('.portfolio-details_image-box .bxslider').length) {
 };
 	
 
+//===Search box ===
+function searchbox() {
+	//Search Box Toggle
+	if($('.seach-toggle').length){
+		//Dropdown Button
+		$('.seach-toggle').on('click', function() {
+			$(this).toggleClass('active');
+			$(this).next('.search-box').toggleClass('now-visible');
+		});
+	}
+}
 
 
 // Dom Ready Function
