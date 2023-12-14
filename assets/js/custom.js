@@ -64,18 +64,39 @@ if (document.querySelector('.mobile-menu')) {
             document.body.classList.remove('mobile-menu-visible');
         });
     });
-}
-// Scroll to a Specific Div
-if($('.scroll-to-target').length){
-    $(".scroll-to-target").on('click', function() {
-        var target = $(this).attr('data-target');
-       // animate
-       $('html, body').animate({
-           scrollTop: $(target).offset().top
-        }, 1000);
 
+    // Smooth Scroll for menu items
+    let menuItems = document.querySelectorAll('.mobile-menu .menu-box .menu-outer a');
+    menuItems.forEach(function (item) {
+        item.addEventListener('click', function (event) {
+            // Prevent the default behavior (scrolling to the anchor)
+            event.preventDefault();
+
+            // Get the target section
+            let target = item.getAttribute('data-target');
+
+            // Scroll to the target section
+            document.querySelector(target).scrollIntoView({
+                behavior: 'smooth'
+            });
+
+            // Close the mobile menu if needed
+            document.body.classList.remove('mobile-menu-visible');
+        });
     });
 }
+
+// Scroll to a Specific Div
+// if($('.scroll-to-target').length){
+//     $(".scroll-to-target").on('click', function() {
+//         var target = $(this).attr('data-target');
+//        // animate
+//        $('html, body').animate({
+//            scrollTop: $(target).offset().top
+//         }, 1000);
+
+//     });
+// }
 
 
 
