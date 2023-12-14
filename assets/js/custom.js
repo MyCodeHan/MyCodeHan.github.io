@@ -26,79 +26,60 @@
 
 
 
-if (document.querySelector('.mobile-menu')) {
-    // Custom scrollbar
-    let menuBox = document.querySelector('.mobile-menu .menu-box');
-    menuBox.style.overflowY = 'scroll';
+//Submenu Dropdown Toggle
+const mobileMenu = document.querySelector('.mobile-menu');
+const menuBox = mobileMenu.querySelector('.menu-box');
+const menuContent = document.querySelector('.main-header .nav-outer .main-menu').innerHTML;
+const stickyMenu = document.querySelector('.sticky-header .main-menu');
 
-    // Copy menu content
-    let mobileMenuContent = document.querySelector('.main-header .nav-outer .main-menu').innerHTML;
-    document.querySelector('.mobile-menu .menu-box .menu-outer').insertAdjacentHTML('beforeend', mobileMenuContent);
-    document.querySelector('.sticky-header .main-menu').insertAdjacentHTML('beforeend', mobileMenuContent);
+menuBox.innerHTML = menuContent;
+stickyMenu.innerHTML = menuContent;
 
-    // Dropdown Button
-    let dropdownBtns = document.querySelectorAll('.mobile-menu li.dropdown .dropdown-btn');
-    dropdownBtns.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            this.classList.toggle('open');
-            let ul = this.previousElementSibling;
-            if (ul) {
-                ul.style.transition = 'max-height 0.5s';
-                ul.style.maxHeight = ul.style.maxHeight === '0px' ? ul.scrollHeight + 'px' : '0px';
-            }
-            let megamenu = this.previousElementSibling;
-            if (megamenu) {
-                megamenu.style.transition = 'max-height 0.9s';
-                megamenu.style.maxHeight = megamenu.style.maxHeight === '0px' ? megamenu.scrollHeight + 'px' : '0px';
-            }
-        });
+const dropdownBtns = mobileMenu.querySelectorAll('.mobile-menu li.dropdown .dropdown-btn');
+dropdownBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        const dropdown = this.nextElementSibling;
+        this.classList.toggle('open');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
     });
+});
 
-    // Menu Toggle Btn
-    let mobileNavToggler = document.querySelector('.mobile-nav-toggler');
-    mobileNavToggler.addEventListener('click', function () {
-        document.body.classList.add('mobile-menu-visible');
+const megamenuBtns = mobileMenu.querySelectorAll('.mobile-menu li.dropdown .dropdown-btn');
+megamenuBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        const megamenu = this.previousElementSibling;
+        megamenu.style.display = megamenu.style.display === 'block' ? 'none' : 'block';
     });
+});
 
-    // Close Menu
-    let closeBtns = document.querySelectorAll('.mobile-menu .menu-backdrop, .mobile-menu .close-btn');
-    closeBtns.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            document.body.classList.remove('mobile-menu-visible');
-        });
-    });
+const menuToggleBtn = document.querySelector('.mobile-nav-toggler');
+const menuBackdrop = mobileMenu.querySelector('.menu-backdrop');
+const closeBtn = mobileMenu.querySelector('.close-btn');
 
-    // Smooth Scroll for menu items
-    let menuItems = document.querySelectorAll('.mobile-menu .menu-box .menu-outer a');
-    menuItems.forEach(function (item) {
-        item.addEventListener('click', function (event) {
-            // Prevent the default behavior (scrolling to the anchor)
-            event.preventDefault();
+menuToggleBtn.addEventListener('click', function() {
+    document.body.classList.add('mobile-menu-visible');
+});
 
-            // Get the target section
-            let target = item.getAttribute('data-target');
+function closeMobileMenu() {
+    document.body.classList.remove('mobile-menu-visible');
+}
 
-            // Scroll to the target section
-            document.querySelector(target).scrollIntoView({
-                behavior: 'smooth'
-            });
+menuBackdrop.addEventListener('click', closeMobileMenu);
+closeBtn.addEventListener('click', closeMobileMenu);
 
-            // Close the mobile menu if needed
-            document.body.classList.remove('mobile-menu-visible');
-        });
+
+
+// Scroll to a Specific Div
+if($('.scroll-to-target').length){
+    $(".scroll-to-target").on('click', function() {
+        var target = $(this).attr('data-target');
+       // animate
+       $('html, body').animate({
+           scrollTop: $(target).offset().top
+        }, 1000);
+
     });
 }
-// // Scroll to a Specific Div
-// if($('.scroll-to-target').length){
-//     $(".scroll-to-target").on('click', function() {
-//         var target = $(this).attr('data-target');
-//        // animate
-//        $('html, body').animate({
-//            scrollTop: $(target).offset().top
-//         }, 1000);
-
-//     });
-// }
 
 
 
