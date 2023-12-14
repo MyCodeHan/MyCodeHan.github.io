@@ -23,9 +23,6 @@
 
 
 "use strict";
-
-
-
 if (document.querySelector('.mobile-menu')) {
     // Custom scrollbar
     let menuBox = document.querySelector('.mobile-menu .menu-box');
@@ -67,94 +64,70 @@ if (document.querySelector('.mobile-menu')) {
             document.body.classList.remove('mobile-menu-visible');
         });
     });
+}
 
-    // Smooth Scroll for menu items
-    let menuItems = document.querySelectorAll('.mobile-menu .menu-box .menu-outer a');
-    menuItems.forEach(function (item) {
-        item.addEventListener('click', function (event) {
-            // Prevent the default behavior (scrolling to the anchor)
+// Scroll to a Specific Div
+if (document.querySelectorAll('.scroll-to-target').length) {
+    let scrollToTargets = document.querySelectorAll(".scroll-to-target");
+    scrollToTargets.forEach(function (target) {
+        target.addEventListener('click', function (event) {
+            // Prevent the default behavior (e.g., navigating to the anchor)
             event.preventDefault();
 
-            // Get the target section
-            let target = item.getAttribute('data-target');
+            let targetId = target.getAttribute('data-target');
+            let targetElement = document.querySelector(targetId);
 
-            // Scroll to the target section
-            document.querySelector(target).scrollIntoView({
-                behavior: 'smooth'
-            });
-
-            // Close the mobile menu if needed
-            document.body.classList.remove('mobile-menu-visible');
+            if (targetElement) {
+                // Check if targetElement has scrollIntoView method
+                if (typeof targetElement.scrollIntoView === 'function') {
+                    // Scroll to the target section
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            }
         });
     });
 }
 
+// Parallax Scene for Icons
+['1', '2', '3', '4', '5'].forEach(function (sceneNumber) {
+    if (document.querySelector('.parallax-scene-' + sceneNumber)) {
+        let scene = document.querySelector('.parallax-scene-' + sceneNumber);
+        let parallaxInstance = new Parallax(scene);
+    }
+});
 
-// // Scroll to a Specific Div
-// if($('.scroll-to-target').length){
-//     $(".scroll-to-target").on('click', function() {
-//         var target = $(this).attr('data-target');
-//        // animate
-//        $('html, body').animate({
-//            scrollTop: $(target).offset().top
-//         }, 1000);
-
-//     });
-// }
-
-
-
-//Parallax Scene for Icons
-if($('.parallax-scene-1').length){
-    var scene = $('.parallax-scene-1').get(0);
-    var parallaxInstance = new Parallax(scene);
-}
-if($('.parallax-scene-2').length){
-    var scene = $('.parallax-scene-2').get(0);
-    var parallaxInstance = new Parallax(scene);
-}
-if($('.parallax-scene-3').length){
-    var scene = $('.parallax-scene-3').get(0);
-    var parallaxInstance = new Parallax(scene);
-}
-if($('.parallax-scene-4').length){
-    var scene = $('.parallax-scene-4').get(0);
-    var parallaxInstance = new Parallax(scene);
-}
-if($('.parallax-scene-5').length){
-    var scene = $('.parallax-scene-5').get(0);
-    var parallaxInstance = new Parallax(scene);
-}
-
-
-
-//Add One Page nav
-if($('.scroll-nav').length) {
-    $('.scroll-nav').onePageNav();
-}
-
-
-//Update Header Style and Scroll to Top
-function headerStyle() {
-    if($('.main-header').length){
-        var windowpos = $(window).scrollTop();
-        var siteHeader = $('.main-header');
-        var scrollLink = $('.scroll-top');
-        if (windowpos >= 350) {
-            siteHeader.addClass('fixed-header');
-            scrollLink.fadeIn(300);
-        } else {
-            siteHeader.removeClass('fixed-header');
-            scrollLink.fadeOut(300);
+// Add One Page nav
+if (document.querySelector('.scroll-nav')) {
+    document.querySelector('.scroll-nav').addEventListener('click', function (event) {
+        event.preventDefault();
+        let targetId = event.target.getAttribute('href');
+        let targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop,
+                behavior: 'smooth'
+            });
         }
+    });
+}
+
+// Update Header Style and Scroll to Top
+function headerStyle() {
+    let windowpos = window.scrollY;
+    let siteHeader = document.querySelector('.main-header');
+    let scrollLink = document.querySelector('.scroll-top');
+    if (windowpos >= 350) {
+        siteHeader.classList.add('fixed-header');
+        scrollLink.style.display = 'block';
+    } else {
+        siteHeader.classList.remove('fixed-header');
+        scrollLink.style.display = 'none';
     }
 }
+
 headerStyle();
-
-
-
-
-
 //===Search box ===
 function searchbox() {
 	//Search Box Toggle
