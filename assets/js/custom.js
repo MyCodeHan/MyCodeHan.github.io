@@ -76,28 +76,20 @@ if (document.querySelector('.mobile-menu')) {
             event.preventDefault();
 
             // Get the target section
-            let targetId = item.getAttribute('data-target');
-            let target = document.querySelector(targetId);
+            let target = item.getAttribute('data-target');
 
-            // Check if the target element exists
-            if (target) {
-                // Calculate the offset considering fixed headers or other elements
-                let offset = target.getBoundingClientRect().top + window.scrollY;
+            // Scroll to the target section
+            document.querySelector(target).scrollIntoView({
+                behavior: 'smooth'
+            });
 
-                // Scroll to the target section using smooth scroll
-                window.scrollTo({
-                    top: offset,
-                    behavior: 'smooth'
-                });
-
-                // Remove the class responsible for hiding the menu after a short delay
-                setTimeout(function () {
-                    document.body.classList.remove('mobile-menu-visible');
-                }, 300); // Adjust the delay as needed
-            }
+            // Close the mobile menu if needed
+            document.body.classList.remove('mobile-menu-visible');
         });
     });
 }
+
+
 // // Scroll to a Specific Div
 // if($('.scroll-to-target').length){
 //     $(".scroll-to-target").on('click', function() {
