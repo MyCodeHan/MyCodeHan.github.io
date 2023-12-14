@@ -78,8 +78,12 @@ if (document.querySelector('.mobile-menu')) {
 
             // Check if the target element exists
             if (target) {
-                // Scroll to the target section
-                target.scrollIntoView({
+                // Calculate the target's offset relative to the viewport
+                let offset = target.getBoundingClientRect().top;
+
+                // Scroll to the target section with a smooth animation
+                window.scrollTo({
+                    top: offset + window.scrollY,
                     behavior: 'smooth'
                 });
 
@@ -91,6 +95,24 @@ if (document.querySelector('.mobile-menu')) {
         });
     });
 }
+
+// Additional code for Parallax and One Page Nav (if needed)...
+
+// Update Header Style and Scroll to Top
+function headerStyle() {
+    let windowpos = window.scrollY;
+    let siteHeader = document.querySelector('.main-header');
+    let scrollLink = document.querySelector('.scroll-top');
+    if (windowpos >= 350) {
+        siteHeader.classList.add('fixed-header');
+        scrollLink.style.display = 'block';
+    } else {
+        siteHeader.classList.remove('fixed-header');
+        scrollLink.style.display = 'none';
+    }
+}
+
+headerStyle();
 
 // Scroll to a Specific Div
 // if($('.scroll-to-target').length){
