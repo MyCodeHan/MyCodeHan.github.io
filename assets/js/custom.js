@@ -23,108 +23,47 @@
 
 
 "use strict";
-if (document.querySelector('.mobile-menu')) {
-    // Custom scrollbar
-    let menuBox = document.querySelector('.mobile-menu .menu-box');
-    menuBox.style.overflowY = 'scroll';
+if($('.mobile-menu').length){
 
-    // Copy menu content
-    let mobileMenuContent = document.querySelector('.main-header .nav-outer .main-menu').innerHTML;
-    document.querySelector('.mobile-menu .menu-box .menu-outer').insertAdjacentHTML('beforeend', mobileMenuContent);
-    document.querySelector('.sticky-header .main-menu').insertAdjacentHTML('beforeend', mobileMenuContent);
+    $('.mobile-menu .menu-box').mCustomScrollbar();
 
-    // Dropdown Button
-    let dropdownBtns = document.querySelectorAll('.mobile-menu li.dropdown .dropdown-btn');
-    dropdownBtns.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            this.classList.toggle('open');
-            let ul = this.previousElementSibling;
-            if (ul) {
-                ul.style.transition = 'max-height 0.5s';
-                ul.style.maxHeight = ul.style.maxHeight === '0px' ? ul.scrollHeight + 'px' : '0px';
-            }
-            let megamenu = this.previousElementSibling;
-            if (megamenu) {
-                megamenu.style.transition = 'max-height 0.9s';
-                megamenu.style.maxHeight = megamenu.style.maxHeight === '0px' ? megamenu.scrollHeight + 'px' : '0px';
-            }
-        });
+    var mobileMenuContent = $('.main-header .nav-outer .main-menu').html();
+    $('.mobile-menu .menu-box .menu-outer').append(mobileMenuContent);
+    $('.sticky-header .main-menu').append(mobileMenuContent);
+    
+    //Dropdown Button
+    $('.mobile-menu li.dropdown .dropdown-btn').on('click', function() {
+        $(this).toggleClass('open');
+        $(this).prev('ul').slideToggle(500);
+    });
+    
+    //Dropdown Button
+    $('.mobile-menu li.dropdown .dropdown-btn').on('click', function() {
+        $(this).prev('.megamenu').slideToggle(900);
     });
 
-    // Menu Toggle Btn
-    let mobileNavToggler = document.querySelector('.mobile-nav-toggler');
-    mobileNavToggler.addEventListener('click', function () {
-        document.body.classList.add('mobile-menu-visible');
+    //Menu Toggle Btn
+    $('.mobile-nav-toggler').on('click', function() {
+        $('body').addClass('mobile-menu-visible');
     });
 
-    // Close Menu
-    let closeBtns = document.querySelectorAll('.mobile-menu .menu-backdrop, .mobile-menu .close-btn');
-    closeBtns.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            document.body.classList.remove('mobile-menu-visible');
-        });
-    });
-
-    // Smooth Scroll for menu items
-    let menuItems = document.querySelectorAll('.mobile-menu .menu-box .menu-outer a');
-    menuItems.forEach(function (item) {
-        item.addEventListener('click', function (event) {
-            // Prevent the default behavior (scrolling to the anchor)
-            event.preventDefault();
-
-            // Get the target section
-            let targetId = item.getAttribute('data-target');
-            let target = document.querySelector(targetId);
-
-            // Check if the target element exists
-            if (target) {
-                // Calculate the target's offset relative to the viewport
-                let offset = target.getBoundingClientRect().top;
-
-                // Scroll to the target section with a smooth animation
-                window.scrollTo({
-                    top: offset + window.scrollY,
-                    behavior: 'smooth'
-                });
-
-                // Remove the class responsible for hiding the menu after a short delay
-                setTimeout(function () {
-                    document.body.classList.remove('mobile-menu-visible');
-                }, 300); // Adjust the delay as needed
-            }
-        });
+    //Menu Toggle Btn
+    $('.mobile-menu .menu-backdrop,.mobile-menu .close-btn').on('click', function() {
+        $('body').removeClass('mobile-menu-visible');
     });
 }
 
-// Additional code for Parallax and One Page Nav (if needed)...
-
-// // Update Header Style and Scroll to Top
-// function headerStyle() {
-//     let windowpos = window.scrollY;
-//     let siteHeader = document.querySelector('.main-header');
-//     let scrollLink = document.querySelector('.scroll-top');
-//     if (windowpos >= 350) {
-//         siteHeader.classList.add('fixed-header');
-//         scrollLink.style.display = 'block';
-//     } else {
-//         siteHeader.classList.remove('fixed-header');
-//         scrollLink.style.display = 'none';
-//     }
-// }
-
-// headerStyle();
-
 // Scroll to a Specific Div
-// if($('.scroll-to-target').length){
-//     $(".scroll-to-target").on('click', function() {
-//         var target = $(this).attr('data-target');
-//        // animate
-//        $('html, body').animate({
-//            scrollTop: $(target).offset().top
-//         }, 1000);
+if($('.scroll-to-target').length){
+    $(".scroll-to-target").on('click', function() {
+        var target = $(this).attr('data-target');
+       // animate
+       $('html, body').animate({
+           scrollTop: $(target).offset().top
+        }, 1000);
 
-//     });
-// }
+    });
+}
 
 
 
@@ -158,7 +97,7 @@ if($('.scroll-nav').length) {
 }
 
 
-// Update Header Style and Scroll to Top
+//Update Header Style and Scroll to Top
 function headerStyle() {
     if($('.main-header').length){
         var windowpos = $(window).scrollTop();
@@ -175,6 +114,21 @@ function headerStyle() {
 }
 headerStyle();
 
+
+
+
+
+//===Search box ===
+function searchbox() {
+	//Search Box Toggle
+	if($('.seach-toggle').length){
+		//Dropdown Button
+		$('.seach-toggle').on('click', function() {
+			$(this).toggleClass('active');
+			$(this).next('.search-box').toggleClass('now-visible');
+		});
+	}
+}
 
 
 //Hide Loading Box (Preloader)
@@ -801,17 +755,6 @@ if ($('.portfolio-details_image-box .bxslider').length) {
 };
 	
 
-//===Search box ===
-function searchbox() {
-	//Search Box Toggle
-	if($('.seach-toggle').length){
-		//Dropdown Button
-		$('.seach-toggle').on('click', function() {
-			$(this).toggleClass('active');
-			$(this).next('.search-box').toggleClass('now-visible');
-		});
-	}
-}
 
 
 // Dom Ready Function
