@@ -129,21 +129,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Update Header Style and Scroll to Top
-    function headerStyle() {
-        var windowpos = window.scrollY || window.scrollTop || document.getElementsByTagName("html")[0].scrollTop;
-        var siteHeader = document.querySelector('.main-header');
-        var scrollLink = document.querySelector('.scroll-top');
+    // function headerStyle() {
+    //     var windowpos = window.scrollY || window.scrollTop || document.getElementsByTagName("html")[0].scrollTop;
+    //     var siteHeader = document.querySelector('.main-header');
+    //     var scrollLink = document.querySelector('.scroll-top');
 
-        if (windowpos >= 350) {
-            siteHeader.classList.add('fixed-header');
-            scrollLink.style.display = 'block';
-        } else {
-            siteHeader.classList.remove('fixed-header');
-            scrollLink.style.display = 'none';
-        }
-    }
+    //     if (windowpos >= 350) {
+    //         siteHeader.classList.add('fixed-header');
+    //         scrollLink.style.display = 'block';
+    //     } else {
+    //         siteHeader.classList.remove('fixed-header');
+    //         scrollLink.style.display = 'none';
+    //     }
+    // }
 
-    headerStyle();
+    // headerStyle();
 
     // Update Header Style on Scroll
     window.addEventListener('scroll', function () {
@@ -198,22 +198,22 @@ if ($('.parallax-scene-5').length) {
 // }
 
 
-// //Update Header Style and Scroll to Top
-// function headerStyle() {
-//     if($('.main-header').length){
-//         var windowpos = $(window).scrollTop();
-//         var siteHeader = $('.main-header');
-//         var scrollLink = $('.scroll-top');
-//         if (windowpos >= 350) {
-//             siteHeader.addClass('fixed-header');
-//             scrollLink.fadeIn(300);
-//         } else {
-//             siteHeader.removeClass('fixed-header');
-//             scrollLink.fadeOut(300);
-//         }
-//     }
-// }
-// headerStyle();
+//Update Header Style and Scroll to Top
+function headerStyle() {
+    if($('.main-header').length){
+        var windowpos = $(window).scrollTop();
+        var siteHeader = $('.main-header');
+        var scrollLink = $('.scroll-top');
+        if (windowpos >= 350) {
+            siteHeader.addClass('fixed-header');
+            scrollLink.fadeIn(300);
+        } else {
+            siteHeader.removeClass('fixed-header');
+            scrollLink.fadeOut(300);
+        }
+    }
+}
+headerStyle();
 
 
 
@@ -862,7 +862,7 @@ if ($('.portfolio-details_image-box .bxslider').length) {
 jQuery(document).on('ready', function () {
     (function ($) {
         // add your functions
-
+        headerStyle();
         searchbox();
         tabBox();
         directionswitch();
