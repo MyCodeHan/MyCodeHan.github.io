@@ -43,24 +43,27 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             // Dropdown Button
-            var dropdownBtns = document.querySelectorAll('.mobile-menu li.dropdown .dropdown-btn');
-            dropdownBtns.forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    this.classList.toggle('open');
-                    var ul = this.previousElementSibling;
-                    var megamenu = this.previousElementSibling;
+            var mobileMenu = document.querySelector('.mobile-menu');
+            if (mobileMenu) {
+                mobileMenu.addEventListener('click', function (event) {
+                    var targetBtn = event.target.closest('.dropdown-btn');
+                    if (targetBtn) {
+                        targetBtn.classList.toggle('open');
+                        var ul = targetBtn.previousElementSibling;
+                        var megamenu = targetBtn.previousElementSibling;
 
-                    if (ul) {
-                        ul.style.transition = 'max-height 0.5s';
-                        ul.style.maxHeight = ul.style.maxHeight === '0px' ? ul.scrollHeight + 'px' : '0px';
-                    }
+                        if (ul) {
+                            ul.style.transition = 'max-height 0.5s';
+                            ul.style.maxHeight = ul.style.maxHeight === '0px' ? ul.scrollHeight + 'px' : '0px';
+                        }
 
-                    if (megamenu) {
-                        megamenu.style.transition = 'max-height 0.9s';
-                        megamenu.style.maxHeight = megamenu.style.maxHeight === '0px' ? megamenu.scrollHeight + 'px' : '0px';
+                        if (megamenu) {
+                            megamenu.style.transition = 'max-height 0.9s';
+                            megamenu.style.maxHeight = megamenu.style.maxHeight === '0px' ? megamenu.scrollHeight + 'px' : '0px';
+                        }
                     }
                 });
-            });
+            }
 
             // Menu Toggle Btn
             var mobileNavToggler = document.querySelector('.mobile-nav-toggler');
@@ -69,24 +72,23 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             // Smooth Scroll for menu items
-            // Smooth Scroll for menu items
             var menuItems = document.querySelectorAll('.mobile-menu .menu-box .menu-outer a');
             menuItems.forEach(function (item) {
                 var targetId = item.getAttribute('href');
                 item.setAttribute('data-target', targetId);
-            
+
                 item.addEventListener('click', function (event) {
                     event.preventDefault(); // Prevent the default action
-            
+
                     targetId = this.getAttribute('data-target');
                     var target = document.querySelector(targetId);
-            
+
                     if (target) {
                         window.scrollTo({
                             top: target.offsetTop,
                             behavior: 'smooth'
                         });
-            
+
                         document.body.classList.remove('mobile-menu-visible');
                     }
                 });
@@ -123,35 +125,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Update Header Style and Scroll to Top
-    // function headerStyle() {
-    //     var windowpos = window.scrollY || window.scrollTop || document.getElementsByTagName("html")[0].scrollTop;
-    //     var siteHeader = document.querySelector('.main-header');
-    //     var scrollLink = document.querySelector('.scroll-top');
-
-    //     if (windowpos >= 350) {
-    //         siteHeader.classList.add('fixed-header');
-    //         scrollLink.style.display = 'block';
-    //     } else {
-    //         siteHeader.classList.remove('fixed-header');
-    //         scrollLink.style.display = 'none';
-    //     }
-    // }
-
-    // headerStyle();
-
-    // Update Header Style on Scroll
-    // window.addEventListener('scroll', function () {
-    //     headerStyle();
-    // });
-
     // Scroll to a Specific Div
     var scrollToTargets = document.querySelectorAll('.scroll-to-target');
     scrollToTargets.forEach(function (target) {
         target.addEventListener('click', function () {
             var targetId = target.getAttribute('data-target');
             var targetElement = document.querySelector(targetId);
-                console.log(targetElement)
+            console.log(targetElement)
             if (targetElement) {
                 window.scrollTo({
                     top: targetElement.offsetTop,
