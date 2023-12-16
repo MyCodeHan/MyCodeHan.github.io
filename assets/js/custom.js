@@ -72,27 +72,22 @@ document.addEventListener("DOMContentLoaded", function () {
             // Smooth Scroll for menu items
             var menuItems = document.querySelectorAll('.mobile-menu .menu-box .menu-outer a');
             menuItems.forEach(function (item) {
-                // Add data-target attribute with the corresponding section's ID
                 var targetId = item.getAttribute('href');
                 item.setAttribute('data-target', targetId);
-
+            
                 item.addEventListener('click', function (event) {
-                    event.preventDefault();
-
-                    targetId = this.getAttribute('data-target'); // Get the target ID from the data-target attribute
-
-                    if (targetId) {
-                        var target = document.querySelector(targetId);
-
-                        if (target) {
-                            window.scrollTo({
-                                top: target.offsetTop,
-                                behavior: 'smooth'
-                            });
-
-                            // // Close the mobile menu after clicking on a menu item
-                            // document.body.classList.remove('mobile-menu-visible');
-                        }
+                    event.preventDefault(); // Prevent the default action
+            
+                    targetId = this.getAttribute('data-target');
+                    var target = document.querySelector(targetId);
+            
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop,
+                            behavior: 'smooth'
+                        });
+            
+                        document.body.classList.remove('mobile-menu-visible');
                     }
                 });
             });
@@ -146,9 +141,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // headerStyle();
 
     // Update Header Style on Scroll
-    window.addEventListener('scroll', function () {
-        headerStyle();
-    });
+    // window.addEventListener('scroll', function () {
+    //     headerStyle();
+    // });
 
     // Scroll to a Specific Div
     var scrollToTargets = document.querySelectorAll('.scroll-to-target');
@@ -156,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
         target.addEventListener('click', function () {
             var targetId = target.getAttribute('data-target');
             var targetElement = document.querySelector(targetId);
-
+                console.log(targetElement)
             if (targetElement) {
                 window.scrollTo({
                     top: targetElement.offsetTop,
