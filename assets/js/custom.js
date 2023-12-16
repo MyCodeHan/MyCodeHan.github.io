@@ -862,7 +862,6 @@ if ($('.portfolio-details_image-box .bxslider').length) {
 jQuery(document).on('ready', function () {
     (function ($) {
         // add your functions
-        headerStyle();
         searchbox();
         tabBox();
         directionswitch();
