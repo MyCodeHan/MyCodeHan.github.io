@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             });
 
                             // Close the mobile menu after clicking on a menu item
-                            document.body.classList.remove('mobile-menu-visible');
+                            // document.body.classList.remove('mobile-menu-visible');
                         }
                     }
                 });
