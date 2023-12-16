@@ -90,8 +90,8 @@ document.addEventListener("DOMContentLoaded", function () {
                                 behavior: 'smooth'
                             });
 
-                            // Close the mobile menu after clicking on a menu item
-                            document.body.classList.remove('mobile-menu-visible');
+                            // // Close the mobile menu after clicking on a menu item
+                            // document.body.classList.remove('mobile-menu-visible');
                         }
                     }
                 });
