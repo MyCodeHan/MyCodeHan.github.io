@@ -83,12 +83,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (target) {
                         console.log(target); // Log the target element to the console
 
-                        window.scrollTo({
-                            top: target.getBoundingClientRect().top + window.scrollY,
-                            behavior: 'smooth'
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
                         });
 
-                        document.body.classList.remove('mobile-menu-visible');
+                        // Do not remove the 'mobile-menu-visible' class here
                     }
                 });
             });
@@ -125,10 +125,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 var targetSection = document.getElementById(targetId);
 
                 if (targetSection) {
-                    window.scrollTo({
-                        top: targetSection.offsetTop,
-                        behavior: 'smooth'
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
                     });
+
+                    // Do not remove the 'mobile-menu-visible' class here
                 }
             }
         });
@@ -141,14 +143,17 @@ document.addEventListener("DOMContentLoaded", function () {
             var targetId = target.getAttribute('data-target');
             var targetElement = document.querySelector(targetId);
             if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop,
-                    behavior: 'smooth'
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
                 });
+
+                // Do not remove the 'mobile-menu-visible' class here
             }
         });
     });
 });
+
 
 //Parallax Scene for Icons
 if ($('.parallax-scene-1').length) {
