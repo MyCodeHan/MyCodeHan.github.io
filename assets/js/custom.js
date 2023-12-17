@@ -69,29 +69,38 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             // Smooth Scroll for menu items
-            var menuItems = document.querySelectorAll('.mobile-menu .menu-box .menu-outer a');
-            menuItems.forEach(function (item) {
-                var targetId = item.getAttribute('href');
-                item.setAttribute('data-target', targetId);
+           // Smooth Scroll for menu items
+var menuItems = document.querySelectorAll('.mobile-menu .menu-box .menu-outer a');
+menuItems.forEach(function (item) {
+    var targetId = item.getAttribute('href');
+    item.setAttribute('data-target', targetId);
 
-                item.addEventListener('click', function (event) {
-                    event.preventDefault(); // Prevent the default action
+    item.addEventListener('click', function (event) {
+        // Prevent the default action only for non-touch devices
+        if (!('ontouchstart' in window)) {
+            event.preventDefault();
+        }
 
-                    targetId = this.getAttribute('data-target');
-                    var target = document.querySelector(targetId);
+        targetId = this.getAttribute('data-target');
+        var target = document.querySelector(targetId);
 
-                    if (target) {
-                        console.log(target); // Log the target element to the console
+        if (target) {
+            console.log(target); // Log the target element to the console
 
-                        window.scrollTo({
-                            top: target.getBoundingClientRect().top + window.scrollY,
-                            behavior: 'smooth'
-                        });
+            var scrollOptions = {
+                top: target.getBoundingClientRect().top + window.scrollY,
+                behavior: 'smooth'
+            };
 
-                        document.body.classList.remove('mobile-menu-visible');
-                    }
-                });
-            });
+            // Scroll to the target element
+            window.scroll(scrollOptions);
+
+            // Keep the menu open
+            // document.body.classList.add('mobile-menu-visible');
+        }
+    });
+});
+
 
             // Close Menu when clicking outside
             document.addEventListener('click', function (event) {
