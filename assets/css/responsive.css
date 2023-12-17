@@ -743,6 +743,7 @@
     /*** Header Css ***/
     .header {
         padding: 15px 0;
+        z-index: 5;
     }
 
     .header-top {
