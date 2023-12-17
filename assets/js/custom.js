@@ -81,12 +81,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     var target = document.querySelector(targetId);
 
                     if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
+                        console.log(target); // Log the target element to the console
+
+                        window.scrollTo({
+                            top: target.getBoundingClientRect().top + window.scrollY,
+                            behavior: 'smooth'
                         });
 
-                        // Do not remove the 'mobile-menu-visible' class here
+                        document.body.classList.remove('mobile-menu-visible');
                     }
                 });
             });
@@ -123,9 +125,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 var targetSection = document.getElementById(targetId);
 
                 if (targetSection) {
-                    targetSection.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    window.scrollTo({
+                        top: targetSection.offsetTop,
+                        behavior: 'smooth'
                     });
                 }
             }
@@ -140,14 +142,15 @@ document.addEventListener("DOMContentLoaded", function () {
             var targetElement = document.querySelector(targetId);
 
             if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
                 });
             }
         });
     });
 });
+
 //Parallax Scene for Icons
 if ($('.parallax-scene-1').length) {
     var scene = $('.parallax-scene-1').get(0);
