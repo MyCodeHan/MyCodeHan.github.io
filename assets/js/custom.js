@@ -88,20 +88,20 @@ document.addEventListener("DOMContentLoaded", function () {
                             behavior: 'smooth'
                         });
 
-                        // document.body.classList.remove('mobile-menu-visible');
+                        document.body.classList.remove('mobile-menu-visible');
                     }
                 });
             });
 
             // Close Menu when clicking outside
-            // document.addEventListener('click', function (event) {
-            //     var isClickInsideMenu = mobileMenu.contains(event.target);
-            //     var isClickOnNavToggler = mobileNavToggler.contains(event.target);
+            document.addEventListener('click', function (event) {
+                var isClickInsideMenu = mobileMenu.contains(event.target);
+                var isClickOnNavToggler = mobileNavToggler.contains(event.target);
 
-            //     if (!isClickInsideMenu && !isClickOnNavToggler) {
-            //         document.body.classList.remove('mobile-menu-visible');
-            //     }
-            // });
+                if (!isClickInsideMenu && !isClickOnNavToggler) {
+                    document.body.classList.remove('mobile-menu-visible');
+                }
+            });
 
             // Close Menu when clicking on close button
             var closeBtns = document.querySelectorAll('.mobile-menu .menu-backdrop, .mobile-menu .close-btn');
