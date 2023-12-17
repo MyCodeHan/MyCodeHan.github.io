@@ -81,12 +81,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     var target = document.querySelector(targetId);
 
                     if (target) {
+                        console.log(target); // Log the target element to the console
+
                         window.scrollTo({
-                            top: target.offsetTop,
+                            top: target.getBoundingClientRect().top + window.scrollY,
                             behavior: 'smooth'
                         });
 
-       
+                        document.body.classList.remove('mobile-menu-visible');
                     }
                 });
             });
@@ -138,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
         target.addEventListener('click', function () {
             var targetId = target.getAttribute('data-target');
             var targetElement = document.querySelector(targetId);
-            console.log(targetElement)
+
             if (targetElement) {
                 window.scrollTo({
                     top: targetElement.offsetTop,
