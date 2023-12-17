@@ -83,12 +83,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (target) {
                         console.log(target); // Log the target element to the console
 
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
+                        window.scrollTo({
+                            top: target.getBoundingClientRect().top + window.scrollY,
+                            behavior: 'smooth'
                         });
 
-                        // Do not remove the 'mobile-menu-visible' class here
+                        document.body.classList.remove('mobile-menu-visible');
                     }
                 });
             });
@@ -125,12 +125,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 var targetSection = document.getElementById(targetId);
 
                 if (targetSection) {
-                    targetSection.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    window.scrollTo({
+                        top: targetSection.offsetTop,
+                        behavior: 'smooth'
                     });
-
-                    // Do not remove the 'mobile-menu-visible' class here
                 }
             }
         });
@@ -142,13 +140,12 @@ document.addEventListener("DOMContentLoaded", function () {
         target.addEventListener('click', function () {
             var targetId = target.getAttribute('data-target');
             var targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
 
-                // Do not remove the 'mobile-menu-visible' class here
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
+                });
             }
         });
     });
