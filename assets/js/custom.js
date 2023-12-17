@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             behavior: 'smooth'
                         });
 
-                        // document.body.classList.remove('mobile-menu-visible'); // Remove this line
+       
                     }
                 });
             });
