@@ -72,26 +72,14 @@ document.addEventListener("DOMContentLoaded", function () {
             // Smooth Scroll for menu items
             var menuItems = document.querySelectorAll('.mobile-menu .menu-box .menu-outer a');
             menuItems.forEach(function (item) {
-                var targetId = item.getAttribute('href');
-                item.setAttribute('data-target', targetId);
-
                 item.addEventListener('click', function (event) {
-                    event.preventDefault(); // Prevent the default action
+                    event.preventDefault();
 
-                    targetId = this.getAttribute('data-target');
+                    var targetId = this.getAttribute('data-target');
                     var target = document.querySelector(targetId);
-                    console.log(target);
+
                     if (target) {
-                        console.log(target); // Log the target element to the console
-
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start', // Adjust as needed
-                            inline: 'nearest' // Adjust as needed
-                        });
-            
-
-                        // document.body.classList.remove('mobile-menu-visible');
+                        scrollTo(target);
                     }
                 });
             });
@@ -126,12 +114,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 var targetId = event.target.getAttribute('href').substring(1);
                 var targetSection = document.getElementById(targetId);
-console.log(targetSection)
+
                 if (targetSection) {
-                    window.scrollTo({
-                        top: targetSection.offsetTop,
-                        behavior: 'smooth'
-                    });
+                    scrollTo(targetSection);
                 }
             }
         });
@@ -145,13 +130,23 @@ console.log(targetSection)
             var targetElement = document.querySelector(targetId);
 
             if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop,
-                    behavior: 'smooth'
-                });
+                scrollTo(targetElement);
             }
         });
     });
+
+    function scrollTo(element) {
+        var offset = 60; // Adjust as needed
+        var bodyRect = document.body.getBoundingClientRect().top;
+        var elementRect = element.getBoundingClientRect().top;
+        var elementPosition = elementRect - bodyRect;
+        var offsetPosition = elementPosition - offset;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
+    }
 });
 
 //Parallax Scene for Icons
