@@ -75,25 +75,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 var targetId = item.getAttribute('href');
                 item.setAttribute('data-target', targetId);
 
-                function scrollToTarget() {
-                    targetId = item.getAttribute('data-target');
-                    var target = document.querySelector(targetId);
+                item.addEventListener('click', function (event) {
+                    // event.preventDefault(); // Prevent the default action
 
+                    targetId = this.getAttribute('data-target');
+                    var target = document.querySelector(targetId);
+                    console.log(target);
                     if (target) {
                         console.log(target); // Log the target element to the console
 
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
+                        window.scrollTo({
+                            top: target.getBoundingClientRect().top + window.scrollY,
+                            behavior: 'smooth'
                         });
 
-                        // Do not close the mobile menu
+                        // document.body.classList.remove('mobile-menu-visible');
                     }
-                }
-
-                // Use both click and touchend events
-                item.addEventListener('click', scrollToTarget);
-                item.addEventListener('touchend', scrollToTarget);
+                });
             });
 
             // Close Menu when clicking outside
@@ -154,7 +152,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-
 //Parallax Scene for Icons
 if ($('.parallax-scene-1').length) {
     var scene = $('.parallax-scene-1').get(0);
@@ -187,7 +184,7 @@ if ($('.parallax-scene-5').length) {
 
 //Update Header Style and Scroll to Top
 function headerStyle() {
-    if($('.main-header').length){
+    if ($('.main-header').length) {
         var windowpos = $(window).scrollTop();
         var siteHeader = $('.main-header');
         var scrollLink = $('.scroll-top');
