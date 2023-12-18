@@ -24,6 +24,7 @@
 
 "use strict";
 
+
 document.addEventListener("DOMContentLoaded", function () {
     var mobileMenu = document.querySelector('.mobile-menu');
 
@@ -72,14 +73,24 @@ document.addEventListener("DOMContentLoaded", function () {
             // Smooth Scroll for menu items
             var menuItems = document.querySelectorAll('.mobile-menu .menu-box .menu-outer a');
             menuItems.forEach(function (item) {
-                item.addEventListener('click', function (event) {
-                    event.preventDefault();
+                var targetId = item.getAttribute('href');
+                item.setAttribute('data-target', targetId);
 
-                    var targetId = this.getAttribute('data-target');
+                item.addEventListener('click', function (event) {
+                    event.preventDefault(); // Prevent the default action
+
+                    targetId = this.getAttribute('data-target');
                     var target = document.querySelector(targetId);
 
                     if (target) {
-                        scrollTo(target);
+                        console.log(target, 'scroll'); // Log the target element to the console
+
+                        window.scrollTo({
+                            top: target.getBoundingClientRect().top + window.scrollY,
+                            behavior: 'smooth'
+                        });
+
+                        // document.body.classList.remove('mobile-menu-visible');
                     }
                 });
             });
@@ -116,7 +127,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 var targetSection = document.getElementById(targetId);
 
                 if (targetSection) {
-                    scrollTo(targetSection);
+                    window.scrollTo({
+                        top: targetSection.offsetTop,
+                        behavior: 'smooth'
+                    });
                 }
             }
         });
@@ -128,25 +142,15 @@ document.addEventListener("DOMContentLoaded", function () {
         target.addEventListener('click', function () {
             var targetId = target.getAttribute('data-target');
             var targetElement = document.querySelector(targetId);
-            console.log(targetElement, 'hello')
+
             if (targetElement) {
-                scrollTo(targetElement);
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
+                });
             }
         });
     });
-
-    function scrollTo(element) {
-        var offset = 60; // Adjust as needed
-        var bodyRect = document.body.getBoundingClientRect().top;
-        var elementRect = element.getBoundingClientRect().top;
-        var elementPosition = elementRect - bodyRect;
-        var offsetPosition = elementPosition - offset;
-
-        window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-        });
-    }
 });
 
 //Parallax Scene for Icons
