@@ -76,8 +76,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 item.setAttribute('data-target', targetId);
 
                 item.addEventListener('click', function (event) {
-                    // event.preventDefault(); // Prevent the default action
+                    event.preventDefault(); // Prevent the default action
 
+                     alert('clicked')
                     targetId = this.getAttribute('data-target');
                     var target = document.querySelector(targetId);
                     console.log(target);
