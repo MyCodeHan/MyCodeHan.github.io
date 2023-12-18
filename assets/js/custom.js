@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     targetId = this.getAttribute('data-target');
                     var target = document.querySelector(targetId);
-
+console.log(target);
                     if (target) {
                         console.log(target); // Log the target element to the console
 
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             behavior: 'smooth'
                         });
 
-                        document.body.classList.remove('mobile-menu-visible');
+                        // document.body.classList.remove('mobile-menu-visible');
                     }
                 });
             });
