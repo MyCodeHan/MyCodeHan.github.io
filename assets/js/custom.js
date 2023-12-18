@@ -78,7 +78,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 item.addEventListener('click', function (event) {
                     event.preventDefault(); // Prevent the default action
 
-                     alert('clicked')
                     targetId = this.getAttribute('data-target');
                     var target = document.querySelector(targetId);
                     console.log(target);
@@ -125,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 var targetId = event.target.getAttribute('href').substring(1);
                 var targetSection = document.getElementById(targetId);
-
+console.log(targetSection)
                 if (targetSection) {
                     window.scrollTo({
                         top: targetSection.offsetTop,
