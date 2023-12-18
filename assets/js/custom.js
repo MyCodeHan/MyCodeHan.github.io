@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
         target.addEventListener('click', function () {
             var targetId = target.getAttribute('data-target');
             var targetElement = document.querySelector(targetId);
-
+            console.log(targetElement, 'hello')
             if (targetElement) {
                 scrollTo(targetElement);
             }
