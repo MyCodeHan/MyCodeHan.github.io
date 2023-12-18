@@ -70,29 +70,52 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             // Smooth Scroll for menu items
-            var menuItems = document.querySelectorAll('.mobile-menu .menu-box .menu-outer a');
-            menuItems.forEach(function (item) {
-                var targetId = item.getAttribute('href');
-                item.setAttribute('data-target', targetId);
+           // Smooth Scroll for menu items
+var menuItems = document.querySelectorAll('.mobile-menu .menu-box .menu-outer a');
+menuItems.forEach(function (item) {
+    var targetId = item.getAttribute('href');
+    item.setAttribute('data-target', targetId);
 
-                item.addEventListener('click', function (event) {
-                    event.preventDefault(); // Prevent the default action
+    item.addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent the default action
 
-                    targetId = this.getAttribute('data-target');
-                    var target = document.querySelector(targetId);
-                    console.log(target);
-                    if (target) {
-                        console.log(target); // Log the target element to the console
+        targetId = this.getAttribute('data-target');
+        var target = document.querySelector(targetId);
 
-                        window.scrollTo({
-                            top: target.getBoundingClientRect().top + window.scrollY,
-                            behavior: 'smooth'
-                        });
-
-                        // document.body.classList.remove('mobile-menu-visible');
-                    }
-                });
+        if (target) {
+            window.scrollTo({
+                top: target.getBoundingClientRect().top + window.scrollY,
+                behavior: 'smooth'
             });
+
+            // Optionally, close the mobile menu after a delay
+            setTimeout(function () {
+                document.body.classList.remove('mobile-menu-visible');
+            }, 15000); // Adjust the delay as needed
+        }
+    });
+
+    // Handle touch events for mobile
+    item.addEventListener('touchend', function (event) {
+        event.preventDefault(); // Prevent the default action
+
+        targetId = this.getAttribute('data-target');
+        var target = document.querySelector(targetId);
+
+        if (target) {
+            window.scrollTo({
+                top: target.getBoundingClientRect().top + window.scrollY,
+                behavior: 'smooth'
+            });
+
+            // Optionally, close the mobile menu after a delay
+            setTimeout(function () {
+                document.body.classList.remove('mobile-menu-visible');
+            }, 300); // Adjust the delay as needed
+        }
+    });
+});
+
 
             // Close Menu when clicking outside
             document.addEventListener('click', function (event) {
