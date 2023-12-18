@@ -75,23 +75,25 @@ document.addEventListener("DOMContentLoaded", function () {
                 var targetId = item.getAttribute('href');
                 item.setAttribute('data-target', targetId);
 
-                item.addEventListener('click', function (event) {
-                    event.preventDefault(); // Prevent the default action
-
-                    targetId = this.getAttribute('data-target');
+                function scrollToTarget() {
+                    targetId = item.getAttribute('data-target');
                     var target = document.querySelector(targetId);
-console.log(target);
+
                     if (target) {
                         console.log(target); // Log the target element to the console
 
-                        window.scrollTo({
-                            top: target.getBoundingClientRect().top + window.scrollY,
-                            behavior: 'smooth'
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
                         });
 
-                        // document.body.classList.remove('mobile-menu-visible');
+                        // Do not close the mobile menu
                     }
-                });
+                }
+
+                // Use both click and touchend events
+                item.addEventListener('click', scrollToTarget);
+                item.addEventListener('touchend', scrollToTarget);
             });
 
             // Close Menu when clicking outside
@@ -151,6 +153,7 @@ console.log(target);
         });
     });
 });
+
 
 //Parallax Scene for Icons
 if ($('.parallax-scene-1').length) {
